@@ -4,7 +4,8 @@ import * as Atoms from "../state/index";
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { useElementSize } from "usehooks-ts";
+import { useElementSize, useTimeout } from "usehooks-ts";
+import { useState } from "react";
 
 const container = {
   hidden: {},
@@ -30,7 +31,13 @@ export const ResultCard = () => {
   const [result, setResult] = useAtom(Atoms.resultAtom);
   const [, setAnswer] = useAtom(Atoms.answerAtom);
 
+  const [canDisplayConfetti, setCanDisplayConfetti] = useState(false);
+
   const [containerRef, { width, height }] = useElementSize();
+
+  useTimeout(() => {
+    setCanDisplayConfetti(result === true && width > 0 && height > 0);
+  }, 300);
 
   const handleReplayButtonClick = () => {
     setAnswer("");
@@ -51,7 +58,7 @@ export const ResultCard = () => {
       animate="show"
       className="backdrop-blur-sm backdrop-invert px-12 py-6 rounded-md flex flex-col items-center"
     >
-      {result && width > 0 && height > 0 && (
+      {canDisplayConfetti && (
         <Confetti
           width={width}
           height={height}
