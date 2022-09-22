@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { animationFrames, of } from "rxjs";
-import { Song, songs } from "../data";
+import { songs } from "../data";
 import { map } from "rxjs/operators";
 import { atomWithObservable } from "jotai/utils";
 import { search } from "../functions/search";
@@ -9,6 +9,8 @@ const SECOND = 1000;
 const SONG_DURATION = 30 * SECOND;
 
 const MAX_SUGGESTIONS = 5;
+
+// TODO : random playlist
 
 const getRandomSong = () => songs[Math.floor(Math.random() * songs.length)];
 

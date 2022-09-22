@@ -8,8 +8,6 @@ import { ResultCard } from "../components/ResultCard";
 import { AnswerCard } from "../components/AnswerCard";
 import { SoundControls } from "../components/SoundControls";
 
-// TODO : put every audio file on Cloud Storage
-
 const Home: NextPage = () => {
   const [isPlaying] = useAtom(Atoms.isPlayingAtom);
   const [result] = useAtom(Atoms.resultAtom);

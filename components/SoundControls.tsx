@@ -12,7 +12,9 @@ export const SoundControls = () => {
   const [, setResult] = useAtom(Atoms.resultAtom);
   const [hasLost] = useAtom(Atoms.hasLostAtom);
 
-  const [play, { stop }] = useSound(currentSong.soundFile, {
+  const soundFileUrl = `https://saironmaidenblindtest.blob.core.windows.net${currentSong.soundFile}`;
+
+  const [play, { stop }] = useSound(soundFileUrl, {
     interrupt: true,
     onplay: () => {
       if (!isProduction) {
