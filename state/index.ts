@@ -10,11 +10,15 @@ const SONG_DURATION = 30 * SECOND;
 
 const MAX_SUGGESTIONS = 5;
 
-// TODO : random playlist
+const playlist = [...songs].sort(() => Math.random() - 0.5);
 
-const getRandomSong = () => songs[Math.floor(Math.random() * songs.length)];
+export const currentSongIndexAtom = atom(0);
 
-export const currentSongAtom = atom(getRandomSong());
+export const currentSongAtom = atom((get) => {
+  const currentSongIndex = get(currentSongIndexAtom);
+  return playlist[currentSongIndex % playlist.length];
+});
+
 export const isPlayingAtom = atom(false);
 export const startedAtAtom = atom<Date | undefined>(undefined);
 

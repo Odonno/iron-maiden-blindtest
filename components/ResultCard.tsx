@@ -2,7 +2,6 @@ import { CheckCircleIcon, PlayIcon } from "./Icons";
 import Image from "next/image";
 import * as Atoms from "../state/index";
 import { useAtom } from "jotai";
-import { songs } from "../data";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
 import { useElementSize } from "usehooks-ts";
@@ -24,7 +23,8 @@ const item = {
 const confettiColors = ["#e0e0e0", "#bdbdbd", "#9e9e9e", "#757575", "#616161"];
 
 export const ResultCard = () => {
-  const [currentSong, setCurrentSong] = useAtom(Atoms.currentSongAtom);
+  const [, setCurrentSongIndexAtom] = useAtom(Atoms.currentSongIndexAtom);
+  const [currentSong] = useAtom(Atoms.currentSongAtom);
   const [, setIsPlaying] = useAtom(Atoms.isPlayingAtom);
   const [, setStartedAt] = useAtom(Atoms.startedAtAtom);
   const [result, setResult] = useAtom(Atoms.resultAtom);
@@ -33,11 +33,9 @@ export const ResultCard = () => {
   const [containerRef, { width, height }] = useElementSize();
 
   const handleReplayButtonClick = () => {
-    const getRandomSong = () => songs[Math.floor(Math.random() * songs.length)];
-
     setAnswer("");
     setResult(undefined);
-    setCurrentSong(getRandomSong());
+    setCurrentSongIndexAtom((index) => index + 1);
 
     setTimeout(() => {
       setIsPlaying(true);
