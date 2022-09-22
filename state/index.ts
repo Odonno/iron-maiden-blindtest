@@ -54,7 +54,7 @@ export const progressAtom = atomWithObservable<number | undefined>(
 
 export const answerAtom = atom("");
 
-export const suggestionsAtom = atom<Song[]>(async (get) => {
+export const suggestionsAtom = atom(async (get) => {
   const isPlaying = get(isPlayingAtom);
   const answer = get(answerAtom);
 
