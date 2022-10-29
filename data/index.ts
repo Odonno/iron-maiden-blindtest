@@ -1,6 +1,7 @@
 export type Album = {
   title: string;
   image: string;
+  blurHash: string;
 };
 
 export type Song = {
@@ -12,86 +13,103 @@ export type Song = {
 const ironMaiden: Album = {
   title: "Iron Maiden",
   image: "/albums/iron-maiden.jpg",
+  blurHash: "UJHnsLR.9xs=$;$|o#s++}N2-TWB;gxujEWC",
 };
 
 const killers: Album = {
   title: "Killers",
   image: "/albums/killers.jpg",
+  blurHash: "UDC~-R.59KWZ~BtQxrxV=zs*%HR-=yRlbasp",
 };
 
 const theNumberOfTheBeast: Album = {
   title: "The Number of the Beast",
   image: "/albums/number-of-the-beast.jpg",
+  blurHash: "UGDbj5VtX8k9~Ds:njbH^jxujZs:xJbEW=WC",
 };
 
 const pieceOfMind: Album = {
   title: "Piece of Mind",
   image: "/albums/piece-of-mind.jpg",
+  blurHash: "UHD+I;IrE3oL}bs.xrs.;UxYWYt6^7ocj?WE",
 };
 
 const powerslave: Album = {
   title: "Powerslave",
   image: "/albums/powerslave.jpg",
+  blurHash: "UELDV^NF5]NH0[?GT2bI08WA4nRjRNt6#5Rk",
 };
 
 const somewhereInTime: Album = {
   title: "Somewhere in Time",
   image: "/albums/somewhere-in-time.jpg",
+  blurHash: "U9E30T%0A[os9D4nxbW8~pxa%Nt7-PRNNIRj",
 };
 
 const seventhSonOfASeventhSon: Album = {
   title: "Seventh Son of a Seventh Son",
   image: "/albums/seventh-son-of-a-seventh-son.jpg",
+  blurHash: "U8J9iK-N1S^hUd?wI[ad009FD4Io^,N3-PIp",
 };
 
 const noPrayerForTheDying: Album = {
   title: "No Prayer for the Dying",
   image: "/albums/no-prayer-for-the-dying.jpg",
+  blurHash: "UFFF5M-?1UT3VYWYRPR-rLxutOjCafM{%Ls*",
 };
 
 const fearOfTheDark: Album = {
   title: "Fear of the Dark",
   image: "/albums/fear-of-the-dark.jpg",
+  blurHash: "U68#+^HX00=,?]IBN3,%s=jWNzV@MwkZr;jr",
 };
 
 const theXFactor: Album = {
   title: "The X Factor",
   image: "/albums/the-x-factor.jpg",
+  blurHash: "U48W:N4:00^*t,M_-oW?ELWA-;Rj~VIoIoj?",
 };
 
 const virtualXI: Album = {
   title: "Virtual XI",
   image: "/albums/virtual-xi.jpg",
+  blurHash: "UED+G38v$,Bo*|q^Q.a0m*R3NEoGO@pJTdtR",
 };
 
 const braveNewWorld: Album = {
   title: "Brave New World",
   image: "/albums/brave-new-world.jpg",
+  blurHash: "UIG95zo%M{RPM2R4t8t84Tx]MwoI_MtSM{j]",
 };
 
 const danceOfDeath: Album = {
   title: "Dance of Death",
   image: "/albums/dance-of-death.jpg",
+  blurHash: "U4E-js5jro3U02}Z11M{04rv9Z=d3nEL;N=x",
 };
 
 const aMatterOfLifeAndDeath: Album = {
   title: "A Matter of Life and Death",
   image: "/albums/a-matter-of-life-and-death.jpg",
+  blurHash: "U28z+6=Ya00M_4={RkIp0MWrE1bJEM9axu-p",
 };
 
 const theFinalFrontier: Album = {
   title: "The Final Frontier",
   image: "/albums/the-final-frontier.jpg",
+  blurHash: "U69jZz-@Dznb=wI-SuoH^CbVomxgrgNEWaxI",
 };
 
 const theBookOfSouls: Album = {
   title: "The Book of Souls",
   image: "/albums/the-book-of-souls.jpg",
+  blurHash: "U57-H7NH00%1~qoJRPW=?vj[%1R*bway-:kC",
 };
 
 const senjutsu: Album = {
   title: "Senjutsu",
   image: "/albums/senjutsu.jpg",
+  blurHash: "U26aI;$Q01-A}Ho|OTNH,@NaOEXS=xV@XRtR",
 };
 
 export const albums: Album[] = [

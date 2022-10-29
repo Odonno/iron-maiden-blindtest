@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Confetti from "react-confetti";
 import { useElementSize, useTimeout } from "usehooks-ts";
 import { useState } from "react";
+import { BlurhashCanvas } from "react-blurhash";
 
 const container = {
   hidden: {},
@@ -77,7 +78,14 @@ export const ResultCard = () => {
         </div>
       </motion.div>
 
-      <motion.div variants={item}>
+      <motion.div variants={item} className="relative overflow-hidden">
+        <BlurhashCanvas
+          hash={currentSong.album.blurHash}
+          width={200}
+          height={200}
+          punch={1}
+          className="absolute inset-0 w-full h-full z-[-1]"
+        />
         <Image
           src={currentSong.album.image}
           alt="Album cover of the song"

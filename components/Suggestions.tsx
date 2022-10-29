@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import Image from "next/image";
+import { BlurhashCanvas } from "react-blurhash";
 import { type Song } from "../data";
 import * as Atoms from "../state/index";
 
@@ -36,12 +37,22 @@ export const Suggestions = () => {
                 onClick={() => handleSuggestionClick(suggestion)}
                 className="w-full bg-primary/95 px-4 py-3 flex rounded-md focus:outline-3 focus:outline-green-400"
               >
-                <Image
-                  src={suggestion.album.image}
-                  alt=""
-                  width={50}
-                  height={50}
-                />
+                <div className="relative overflow-hidden z-10">
+                  <BlurhashCanvas
+                    hash={suggestion.album.blurHash}
+                    width={50}
+                    height={50}
+                    punch={1}
+                    className="absolute inset-0 w-full h-full z-[-1]"
+                  />
+                  <Image
+                    src={suggestion.album.image}
+                    alt=""
+                    width={50}
+                    height={50}
+                  />
+                </div>
+
                 <div className="ml-3 flex flex-col justify-start items-start">
                   <div className="text-xxs sm:text-xs text-gray-300">
                     {suggestion.album.title}

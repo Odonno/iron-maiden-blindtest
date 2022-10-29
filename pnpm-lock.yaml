@@ -6,6 +6,7 @@ specifiers:
   '@types/react': 18.0.20
   '@types/react-dom': 18.0.6
   autoprefixer: ^10.4.11
+  blurhash: ^2.0.3
   classnames: ^2.3.2
   eslint: 8.23.1
   eslint-config-next: 13.0.0
@@ -15,6 +16,7 @@ specifiers:
   next: 13.0.0
   postcss: ^8.4.16
   react: 18.2.0
+  react-blurhash: ^0.2.0
   react-confetti: ^6.1.0
   react-dom: 18.2.0
   rxjs: ^7.5.6
@@ -24,12 +26,14 @@ specifiers:
   usehooks-ts: ^2.6.0
 
 dependencies:
+  blurhash: 2.0.3
   classnames: 2.3.2
   flexsearch: 0.7.21
   framer-motion: 7.3.6_biqbaboplfbrettd7655fr4n2y
   jotai: 1.8.4_react@18.2.0
   next: 13.0.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
+  react-blurhash: 0.2.0_lesa7g4ho236zevs7zsdlyrpd4
   react-confetti: 6.1.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   rxjs: 7.5.6
@@ -571,6 +575,10 @@ packages:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
     dev: true
+
+  /blurhash/2.0.3:
+    resolution: {integrity: sha512-nTnJTOheiaV3b189f7rH5AbbrnQB2r3CcOZBg47GUDaE9DrxyBPD2w0HYp4ME2UBlTP7LMIa6nMWqg/58oyIzA==}
+    dev: false
 
   /brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -1997,6 +2005,16 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
     dev: true
+
+  /react-blurhash/0.2.0_lesa7g4ho236zevs7zsdlyrpd4:
+    resolution: {integrity: sha512-MfhPLfFTNCX3MCJ8nM5t+T5qAixBUv8QHVcHORs5iVaqdpg+IW/e4lpOphc0bm6AvKz//4MuHESIeKKoxi3wnA==}
+    peerDependencies:
+      blurhash: ^2.0.3
+      react: '>=15'
+    dependencies:
+      blurhash: 2.0.3
+      react: 18.2.0
+    dev: false
 
   /react-confetti/6.1.0_react@18.2.0:
     resolution: {integrity: sha512-7Ypx4vz0+g8ECVxr88W9zhcQpbeujJAVqL14ZnXJ3I23mOI9/oBVTQ3dkJhUmB0D6XOtCZEM6N0Gm9PMngkORw==}

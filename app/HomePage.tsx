@@ -10,6 +10,10 @@ import { ResultCard } from "../components/ResultCard";
 import { AnswerCard } from "../components/AnswerCard";
 import { SoundControls } from "../components/SoundControls";
 
+// TODO : complete list of songs
+// TODO : fix sync between audio file and audio player
+// TODO : prefetch next song
+
 const Home: NextPage = () => {
   const [isPlaying] = useAtom(Atoms.isPlayingAtom);
   const [result] = useAtom(Atoms.resultAtom);
