@@ -31,6 +31,7 @@ export const ResultCard = () => {
   const [, setStartedAt] = useAtom(Atoms.startedAtAtom);
   const [result, setResult] = useAtom(Atoms.resultAtom);
   const [, setAnswer] = useAtom(Atoms.answerAtom);
+  const [isSongPrefetched] = useAtom(Atoms.isSongPrefetchedAtom);
 
   const [canDisplayConfetti, setCanDisplayConfetti] = useState(false);
 
@@ -101,10 +102,11 @@ export const ResultCard = () => {
 
       <motion.button
         variants={item}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: isSongPrefetched ? 1.05 : 1 }}
+        whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
         type="button"
-        className="mt-6 rounded-md flex justify-center items-center bg-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400"
+        disabled={!isSongPrefetched}
+        className="mt-6 rounded-md flex justify-center items-center bg-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-primary/20"
         onClick={handleReplayButtonClick}
       >
         <PlayIcon />

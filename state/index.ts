@@ -1,7 +1,7 @@
 import { atom } from "jotai";
-import { animationFrames, of } from "rxjs";
+import { animationFrames, from, of } from "rxjs";
 import { songs } from "../data";
-import { map } from "rxjs/operators";
+import { map, startWith } from "rxjs/operators";
 import { atomWithObservable } from "jotai/utils";
 import { search } from "../functions/search";
 
@@ -18,6 +18,29 @@ export const currentSongAtom = atom((get) => {
   const currentSongIndex = get(currentSongIndexAtom);
   return playlist[currentSongIndex % playlist.length];
 });
+
+export const nextSongAtom = atom((get) => {
+  const currentSongIndex = get(currentSongIndexAtom);
+  return playlist[(currentSongIndex + 1) % playlist.length];
+});
+
+const songPrefetchedAtom = atom((get) => {
+  const isGameFinished = get(isGameFinishedAtom);
+  return isGameFinished ? get(nextSongAtom) : get(currentSongAtom);
+});
+
+export const isSongPrefetchedAtom = atomWithObservable<boolean>(
+  (get) => {
+    const songPrefetched = get(songPrefetchedAtom);
+    const soundFileUrl = `https://saironmaidenblindtest.blob.core.windows.net${songPrefetched.soundFile}`;
+
+    return from(fetch(soundFileUrl)).pipe(
+      map((response) => response.ok),
+      startWith(false)
+    );
+  },
+  { initialValue: false }
+);
 
 export const isPlayingAtom = atom(false);
 export const startedAtAtom = atom<Date | undefined>(undefined);
@@ -100,3 +123,8 @@ export const hasLostAtom = atom((get) => {
 });
 
 export const resultAtom = atom<boolean | undefined>(undefined);
+
+export const isGameFinishedAtom = atom((get) => {
+  const result = get(resultAtom);
+  return result !== undefined;
+});

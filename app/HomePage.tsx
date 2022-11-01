@@ -11,11 +11,11 @@ import { SoundControls } from "../components/SoundControls";
 
 // TODO : complete list of songs
 // TODO : fix sync between audio file and audio player
-// TODO : prefetch next song
 
 const Home: NextPage = () => {
   const [isPlaying] = useAtom(Atoms.isPlayingAtom);
-  const [result] = useAtom(Atoms.resultAtom);
+  const [isGameFinished] = useAtom(Atoms.isGameFinishedAtom);
+  const [isSongPrefetched] = useAtom(Atoms.isSongPrefetchedAtom);
 
   return (
     <div className="text-white">
@@ -33,11 +33,14 @@ const Home: NextPage = () => {
 
           {/* TODO : audio visualization / audio spectrum */}
 
-          {result === undefined && <PlayButton />}
-
-          {result !== undefined && <ResultCard />}
-
-          {isPlaying && result === undefined && <AnswerCard />}
+          {isGameFinished ? (
+            <ResultCard />
+          ) : (
+            <>
+              {isSongPrefetched && <PlayButton />}
+              {isPlaying && <AnswerCard />}
+            </>
+          )}
         </motion.div>
       </main>
     </div>
