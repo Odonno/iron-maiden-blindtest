@@ -9,8 +9,8 @@ import { ResultCard } from "../components/ResultCard";
 import { AnswerCard } from "../components/AnswerCard";
 import { SoundControls } from "../components/SoundControls";
 
-// TODO : complete list of songs
 // TODO : fix sync between audio file and audio player
+// TODO : different solo modes: 1 song (current), 20 songs, 50 songs, 100 songs, 1 album
 
 const Home: NextPage = () => {
   const [isPlaying] = useAtom(Atoms.isPlayingAtom);
