@@ -2,20 +2,22 @@
 
 import type { NextPage } from "next";
 import { motion } from "framer-motion";
-import * as Atoms from "../state/index";
+import * as GameAtoms from "../state/game";
 import { useAtom } from "jotai";
-import { PlayButton } from "../components/PlayButton";
-import { ResultCard } from "../components/ResultCard";
+import { SongResultCard } from "../components/SongResultCard";
 import { AnswerCard } from "../components/AnswerCard";
-import { SoundControls } from "../components/SoundControls";
+import { MenuCard } from "../components/MenuCard";
+import { PreparingNextSong } from "../components/PreparingNextSong";
+import { EndResultCard } from "../components/EndResultCard";
 
 // TODO : fix sync between audio file and audio player
-// TODO : different solo modes: 1 song (current), 20 songs, 50 songs, 100 songs, 1 album
+// TODO : prefecthing next song
+// TODO : different solo modes: 1 album
+// TODO : tab on suggestions with "filter": by song (current) vs. by album
+// TODO : share result on social media (on end result card)
 
 const Home: NextPage = () => {
-  const [isPlaying] = useAtom(Atoms.isPlayingAtom);
-  const [isGameFinished] = useAtom(Atoms.isGameFinishedAtom);
-  const [isSongPrefetched] = useAtom(Atoms.isSongPrefetchedAtom);
+  const [currentStepAtom] = useAtom(GameAtoms.currentStepAtom);
 
   return (
     <div className="text-white">
@@ -25,22 +27,14 @@ const Home: NextPage = () => {
           <span className="neon-blue mt-3 text-3xl text-white">Blind test</span>
         </h1>
 
-        <motion.div
-          layout
-          className="flex flex-col justify-center items-center flex-1"
-        >
-          <SoundControls />
+        <motion.div className="flex flex-col justify-center items-center flex-1">
+          {/* TODO : audio visualization / audio spectrum (https://www.remotion.dev/docs/audio-visualization#render-audio-visualization) */}
 
-          {/* TODO : audio visualization / audio spectrum */}
-
-          {isGameFinished ? (
-            <ResultCard />
-          ) : (
-            <>
-              {isSongPrefetched && <PlayButton />}
-              {isPlaying && <AnswerCard />}
-            </>
-          )}
+          {currentStepAtom === "menu" && <MenuCard />}
+          {currentStepAtom === "preparing_next_song" && <PreparingNextSong />}
+          {currentStepAtom === "playing_song" && <AnswerCard />}
+          {currentStepAtom === "song_result" && <SongResultCard />}
+          {currentStepAtom === "end_result" && <EndResultCard />}
         </motion.div>
       </main>
     </div>

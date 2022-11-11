@@ -2,24 +2,19 @@ import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { BlurhashCanvas } from "react-blurhash";
-import { type Song } from "../data";
-import * as Atoms from "../state/index";
+import type { Song } from "../types/songs";
+import * as AnswerAtoms from "../state/answer";
 
 export const Suggestions = () => {
-  const [currentSong] = useAtom(Atoms.currentSongAtom);
-  const [, setAnswer] = useAtom(Atoms.answerAtom);
-  const [, setResult] = useAtom(Atoms.resultAtom);
-  const [, setIsPlaying] = useAtom(Atoms.isPlayingAtom);
-  const [suggestions] = useAtom(Atoms.suggestionsAtom);
+  const [suggestions] = useAtom(AnswerAtoms.suggestionsAtom);
+  const [, chooseAnswer] = useAtom(AnswerAtoms.chooseAnswerAtom);
 
   const handleSuggestionClick = (song: Song) => {
-    setResult(song.title === currentSong.title);
-    setAnswer("");
-    setIsPlaying(false);
+    chooseAnswer(song);
   };
 
   if (suggestions.length === 0) {
-    return <></>;
+    return null;
   }
 
   return (

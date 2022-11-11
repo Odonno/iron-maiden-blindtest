@@ -1,14 +1,4 @@
-export type Album = {
-  title: string;
-  image: string;
-  blurHash: string;
-};
-
-export type Song = {
-  title: string;
-  album: Album;
-  soundFile: string;
-};
+import type { Album, Song } from "../types/songs";
 
 const ironMaiden: Album = {
   title: "Iron Maiden",

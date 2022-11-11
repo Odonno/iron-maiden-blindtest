@@ -1,5 +1,5 @@
 import { Index } from "flexsearch";
-import { songs } from "../data";
+import { songs } from "../data/songs";
 
 let index: Index;
 let isInitialized = false;

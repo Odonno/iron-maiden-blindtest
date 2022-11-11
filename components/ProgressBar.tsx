@@ -1,12 +1,12 @@
 import { useAtom } from "jotai";
-import * as Atoms from "../state/index";
+import * as AnswerAtoms from "../state/answer";
 import classNames from "classnames";
 
 const DISPLAY_PROGRESS = false;
 
 export const ProgressBar = () => {
-  const [progress] = useAtom(Atoms.progressAtom);
-  const [remainingTime] = useAtom(Atoms.remainingTimeAtom);
+  const [progress] = useAtom(AnswerAtoms.progressAtom);
+  const [remainingTime] = useAtom(AnswerAtoms.remainingTimeAtom);
 
   return (
     <div

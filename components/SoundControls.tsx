@@ -1,18 +1,19 @@
 import { useEffect } from "react";
 import useSound from "use-sound";
-import * as Atoms from "../state/index";
+import * as SongAtoms from "../state/song";
 import { useAtom } from "jotai";
+import * as AnswerAtoms from "../state/answer";
 
 const isProduction = process.env.NODE_ENV === "production";
 
 export const SoundControls = () => {
-  const [currentSong] = useAtom(Atoms.currentSongAtom);
-  const [isPlaying, setIsPlaying] = useAtom(Atoms.isPlayingAtom);
-  const [, setStartedAt] = useAtom(Atoms.startedAtAtom);
-  const [, setResult] = useAtom(Atoms.resultAtom);
-  const [hasLost] = useAtom(Atoms.hasLostAtom);
+  const [currentSong] = useAtom(SongAtoms.currentSongAtom);
+  const [hasLost] = useAtom(AnswerAtoms.hasLostAtom);
+  const [, chooseAnswer] = useAtom(AnswerAtoms.chooseAnswerAtom);
 
-  const soundFileUrl = `https://saironmaidenblindtest.blob.core.windows.net${currentSong.soundFile}`;
+  const soundFileUrl = currentSong
+    ? `https://saironmaidenblindtest.blob.core.windows.net${currentSong.soundFile}`
+    : "";
 
   const [play, { stop }] = useSound(soundFileUrl, {
     interrupt: true,
@@ -39,22 +40,17 @@ export const SoundControls = () => {
   });
 
   useEffect(() => {
-    if (isPlaying) {
-      play();
-    }
-    if (!isPlaying) {
-      stop();
-    }
-  }, [isPlaying, play, stop]);
+    play();
+
+    return () => stop();
+  }, [play, stop]);
 
   useEffect(() => {
     if (hasLost) {
-      setIsPlaying(false);
-      setStartedAt(undefined);
-      setResult(false);
+      chooseAnswer();
       stop();
     }
-  }, [hasLost, setIsPlaying, setResult, setStartedAt, stop]);
+  }, [hasLost, chooseAnswer, stop]);
 
-  return <></>;
+  return null;
 };
