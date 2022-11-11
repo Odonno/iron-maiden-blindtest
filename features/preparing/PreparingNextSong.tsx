@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import * as PreparingAtoms from "../state/preparing";
-import * as GameAtoms from "../state/game";
+import * as PreparingAtoms from "./state";
+import * as GameAtoms from "../../state/game";
 import { useEffectOnce } from "usehooks-ts";
 
 export const PreparingNextSong = () => {

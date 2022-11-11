@@ -1,9 +1,8 @@
 import { atom } from "jotai";
-import { menuOptions } from "../data/menu";
-import type { MenuOption } from "../types/menu";
-import * as GameAtoms from "../state/game";
-import * as SongAtoms from "../state/song";
-import * as ResultAtoms from "../state/result";
+import { menuOptions } from "../../data/menu";
+import type { MenuOption } from "../../types/menu";
+import * as GameAtoms from "../../state/game";
+import * as ResultAtoms from "../result/state";
 
 export const resetAtom = atom(null, (_get, set) => {
   set(selectedOptionAtom, undefined);
@@ -12,7 +11,7 @@ export const resetAtom = atom(null, (_get, set) => {
 });
 
 export const startPlayingAtom = atom(null, (_get, set) => {
-  set(SongAtoms.currentSongIndexAtom, 0);
+  set(GameAtoms.currentSongIndexAtom, 0);
   set(GameAtoms.currentStepAtom, "preparing_next_song");
 });
 

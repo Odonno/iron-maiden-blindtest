@@ -1,8 +1,7 @@
 import { atom } from "jotai";
-import * as MenuAtoms from "./menu";
-import * as SongAtoms from "./song";
-import * as GameAtoms from "./game";
-import { menuOptions } from "../data/menu";
+import * as MenuAtoms from "../menu/state";
+import * as GameAtoms from "../../state/game";
+import { menuOptions } from "../../data/menu";
 import { atomWithObservable } from "jotai/utils";
 import { animationFrames, of } from "rxjs";
 import { endWith, map, takeWhile } from "rxjs/operators";
@@ -12,7 +11,7 @@ export const resetAtom = atom(null, (_get, set) => {
 });
 
 export const playNextSongAtom = atom(null, (_get, set) => {
-  set(SongAtoms.currentSongIndexAtom, (prev) => prev + 1);
+  set(GameAtoms.currentSongIndexAtom, (prev) => prev + 1);
   set(GameAtoms.currentStepAtom, "playing_song");
 });
 
@@ -72,7 +71,7 @@ export const isGameFinishedAtom = atom((get) => {
 export const totalGoodAnsweredSongsAtom = atom(0);
 
 export const totalAnsweredSongsAtom = atom((get) => {
-  const currentSongIndex = get(SongAtoms.currentSongIndexAtom);
+  const currentSongIndex = get(GameAtoms.currentSongIndexAtom);
   const currentStep = get(GameAtoms.currentStepAtom);
 
   if (currentStep === "song_result" || currentStep === "end_result") {

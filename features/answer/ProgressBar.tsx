@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import * as AnswerAtoms from "../state/answer";
+import * as AnswerAtoms from "./state";
 import classNames from "classnames";
 
 const DISPLAY_PROGRESS = false;

@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { BlurhashCanvas } from "react-blurhash";
-import type { Song } from "../types/songs";
-import * as AnswerAtoms from "../state/answer";
+import type { Song } from "../../types/songs";
+import * as AnswerAtoms from "./state";
 
 export const Suggestions = () => {
   const [suggestions] = useAtom(AnswerAtoms.suggestionsAtom);

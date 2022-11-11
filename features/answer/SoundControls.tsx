@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import useSound from "use-sound";
-import * as SongAtoms from "../state/song";
+import * as GameAtoms from "../../state/game";
 import { useAtom } from "jotai";
-import * as AnswerAtoms from "../state/answer";
+import * as AnswerAtoms from "./state";
 
 const isProduction = process.env.NODE_ENV === "production";
 
 export const SoundControls = () => {
-  const [currentSong] = useAtom(SongAtoms.currentSongAtom);
+  const [currentSong] = useAtom(GameAtoms.currentSongAtom);
   const [hasLost] = useAtom(AnswerAtoms.hasLostAtom);
   const [, chooseAnswer] = useAtom(AnswerAtoms.chooseAnswerAtom);
 

@@ -1,4 +1,4 @@
-import * as AnswerAtoms from "../state/answer";
+import * as AnswerAtoms from "./state";
 import { useAtom } from "jotai";
 import { Suspense, useRef } from "react";
 import { ProgressBar } from "./ProgressBar";

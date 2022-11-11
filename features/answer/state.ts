@@ -2,12 +2,11 @@ import { atom } from "jotai";
 import { atomWithObservable } from "jotai/utils";
 import { of, animationFrames } from "rxjs";
 import { map } from "rxjs/operators";
-import { songs } from "../data/songs";
-import { search } from "../functions/search";
-import type { Song } from "../types/songs";
-import * as ResultAtoms from "./result";
-import * as SongAtoms from "../state/song";
-import * as GameAtoms from "./game";
+import { songs } from "../../data/songs";
+import { search } from "../../functions/search";
+import type { Song } from "../../types/songs";
+import * as ResultAtoms from "../result/state";
+import * as GameAtoms from "../../state/game";
 
 export const resetAtom = atom(null, (_get, set) => {
   set(ResultAtoms.resultAtom, undefined);
@@ -18,8 +17,8 @@ export const resetAtom = atom(null, (_get, set) => {
 export const chooseAnswerAtom = atom(
   null,
   (get, set, song: Song | undefined) => {
-    const currentSong = get(SongAtoms.currentSongAtom);
-    const hasRemainingSongs = get(SongAtoms.hasRemainingSongsAtom);
+    const currentSong = get(GameAtoms.currentSongAtom);
+    const hasRemainingSongs = get(GameAtoms.hasRemainingSongsAtom);
 
     const result = song?.title === currentSong.title;
     set(ResultAtoms.resultAtom, result);

@@ -1,13 +1,13 @@
-import { CheckCircleIcon, PlayIcon } from "./Icons";
+import { CheckCircleIcon } from "../../components/Icons";
 import Image from "next/image";
-import * as SongAtoms from "../state/song";
+import * as GameAtoms from "../../state/game";
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { useElementSize, useTimeout } from "usehooks-ts";
-import { useState } from "react";
+import { useEffectOnce, useElementSize, useTimeout } from "usehooks-ts";
+import { useEffect, useState } from "react";
 import { BlurhashCanvas } from "react-blurhash";
-import * as ResultAtoms from "../state/result";
+import * as ResultAtoms from "./state";
 import { SummaryResult } from "./SummaryResult";
 
 const container = {
@@ -26,30 +26,34 @@ const item = {
 
 const confettiColors = ["#e0e0e0", "#bdbdbd", "#9e9e9e", "#757575", "#616161"];
 
-export const EndResultCard = () => {
-  const [currentSong] = useAtom(SongAtoms.currentSongAtom);
+export const SongResultCard = () => {
+  const [currentSong] = useAtom(GameAtoms.currentSongAtom);
   const [result] = useAtom(ResultAtoms.resultAtom);
-  const [isSongPrefetched] = useAtom(SongAtoms.isSongPrefetchedAtom);
   const [displaySummaryResult] = useAtom(ResultAtoms.displaySummaryResultAtom);
-  const [canPlayAgain] = useAtom(ResultAtoms.canPlayAgainAtom);
-  const [, playAgain] = useAtom(ResultAtoms.playAgainAtom);
-  const [, goBackToMenu] = useAtom(ResultAtoms.goBackToMenuAtom);
+  const [remainingTime] = useAtom(ResultAtoms.remainingTimeAtom);
+  const [, reset] = useAtom(ResultAtoms.resetAtom);
+  const [isReady] = useAtom(ResultAtoms.isReadyAtom);
+  const [, playNextSong] = useAtom(ResultAtoms.playNextSongAtom);
 
   const [canDisplayConfetti, setCanDisplayConfetti] = useState(false);
+  const [isReset, setIsReset] = useState(false);
 
   const [containerRef, { width, height }] = useElementSize();
+
+  useEffectOnce(() => {
+    reset();
+    setIsReset(true);
+  });
+
+  useEffect(() => {
+    if (isReset && isReady) {
+      playNextSong();
+    }
+  }, [isReset, isReady, playNextSong]);
 
   useTimeout(() => {
     setCanDisplayConfetti(result === true && width > 0 && height > 0);
   }, 300);
-
-  const handleReplayButtonClick = () => {
-    playAgain();
-  };
-
-  const handleGoBackToMenuButtonClick = () => {
-    goBackToMenu();
-  };
 
   return (
     <>
@@ -105,36 +109,18 @@ export const EndResultCard = () => {
             <SummaryResult />
           </motion.div>
         )}
-
-        {canPlayAgain && (
-          <motion.button
-            variants={item}
-            whileHover={{ scale: isSongPrefetched ? 1.05 : 1 }}
-            whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
-            type="button"
-            disabled={!isSongPrefetched}
-            className="mt-6 rounded-md flex justify-center items-center bg-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-primary/20"
-            onClick={handleReplayButtonClick}
-          >
-            <PlayIcon />
-            <span className="ml-2">Play again?</span>
-          </motion.button>
-        )}
       </motion.div>
 
-      <motion.button
-        variants={item}
-        whileHover={{ scale: isSongPrefetched ? 1.05 : 1 }}
-        whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
-        type="button"
-        disabled={!isSongPrefetched}
-        className="mt-10 rounded-md flex justify-center items-center bg-white text-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-gray-400"
-        onClick={handleGoBackToMenuButtonClick}
-      >
-        <span className="ml-2">
-          {canPlayAgain ? "Or go back to menu" : "Go back to menu"}
-        </span>
-      </motion.button>
+      <div className="mt-6 flex flex-col justify-center items-center">
+        <div className="font-bold text-xs">Next song in..</div>
+
+        <div className="mt-6 relative w-20 h-20 bg-primary/80 rounded-full">
+          <div className="circle absolute rounded-full w-full h-full"></div>
+          <div className="absolute flex justify-center items-center font-bold w-full h-full text-5xl">
+            {remainingTime}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

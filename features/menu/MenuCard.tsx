@@ -1,10 +1,10 @@
-import * as MenuAtoms from "../state/menu";
-import * as SongAtoms from "../state/song";
+import * as MenuAtoms from "./state";
+import * as GameAtoms from "../../state/game";
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
-import { PlayIcon } from "./Icons";
-import type { MenuOption } from "../types/menu";
-import { menuOptions } from "../data/menu";
+import { PlayIcon } from "../../components/Icons";
+import type { MenuOption } from "../../types/menu";
+import { menuOptions } from "../../data/menu";
 import { useEffectOnce } from "usehooks-ts";
 
 const container = {
@@ -26,7 +26,7 @@ export const MenuCard = () => {
     MenuAtoms.selectedOptionAtom
   );
   const [playingTime] = useAtom(MenuAtoms.playingTimeAtom);
-  const [isSongPrefetched] = useAtom(SongAtoms.isSongPrefetchedAtom);
+  const [isSongPrefetched] = useAtom(GameAtoms.isSongPrefetchedAtom);
   const [, reset] = useAtom(MenuAtoms.resetAtom);
   const [, startPlaying] = useAtom(MenuAtoms.startPlayingAtom);
 

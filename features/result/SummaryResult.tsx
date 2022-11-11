@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import * as ResultAtoms from "../state/result";
+import * as ResultAtoms from "./state";
 
 export const SummaryResult = () => {
   const [totalAnsweredSongs] = useAtom(ResultAtoms.totalAnsweredSongsAtom);
