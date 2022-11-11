@@ -3,8 +3,7 @@ import useSound from "use-sound";
 import * as GameAtoms from "../../state/game";
 import { useAtom } from "jotai";
 import * as AnswerAtoms from "./state";
-
-const isProduction = process.env.NODE_ENV === "production";
+import { isProduction } from "../../functions";
 
 export const SoundControls = () => {
   const [currentSong] = useAtom(GameAtoms.currentSongAtom);
