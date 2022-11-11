@@ -1,10 +1,11 @@
 import { useAtom } from "jotai";
 import * as ResultAtoms from "./state";
+import * as GameAtoms from "../../state/game";
 
 export const SummaryResult = () => {
   const [totalAnsweredSongs] = useAtom(ResultAtoms.totalAnsweredSongsAtom);
   const [totalGoodAnsweredSongs] = useAtom(
-    ResultAtoms.totalGoodAnsweredSongsAtom
+    GameAtoms.totalGoodAnsweredSongsAtom
   );
   const [percentOfGoodAnsweredSongs] = useAtom(
     ResultAtoms.percentOfGoodAnsweredSongsAtom

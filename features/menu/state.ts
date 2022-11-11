@@ -2,12 +2,11 @@ import { atom } from "jotai";
 import { menuOptions } from "../../data/menu";
 import type { MenuOption } from "../../types/menu";
 import * as GameAtoms from "../../state/game";
-import * as ResultAtoms from "../result/state";
 
 export const resetAtom = atom(null, (_get, set) => {
   set(selectedOptionAtom, undefined);
   set(selectedOptionAtom, menuOptions[0]);
-  set(ResultAtoms.totalGoodAnsweredSongsAtom, 0);
+  set(GameAtoms.totalGoodAnsweredSongsAtom, 0);
 });
 
 export const startPlayingAtom = atom(null, (_get, set) => {

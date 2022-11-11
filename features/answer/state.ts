@@ -24,7 +24,7 @@ export const chooseAnswerAtom = atom(
     set(ResultAtoms.resultAtom, result);
 
     if (result) {
-      set(ResultAtoms.totalGoodAnsweredSongsAtom, (total) => total + 1);
+      set(GameAtoms.totalGoodAnsweredSongsAtom, (total) => total + 1);
     }
 
     if (hasRemainingSongs) {

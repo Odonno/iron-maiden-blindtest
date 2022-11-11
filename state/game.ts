@@ -45,6 +45,8 @@ export const deckAtom = atomWithObservable((get) => {
 
 export const currentSongIndexAtom = atom(0);
 
+export const totalGoodAnsweredSongsAtom = atom(0);
+
 export const currentSongAtom = atom((get) => {
   const currentSongIndex = get(currentSongIndexAtom);
   const deck = get(deckAtom);
