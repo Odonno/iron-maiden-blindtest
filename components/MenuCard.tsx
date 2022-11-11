@@ -7,6 +7,20 @@ import type { MenuOption } from "../types/menu";
 import { menuOptions } from "../data/menu";
 import { useEffectOnce } from "usehooks-ts";
 
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
+
 export const MenuCard = () => {
   const [selectedOption, setSelectedOption] = useAtom(
     MenuAtoms.selectedOptionAtom
@@ -29,13 +43,23 @@ export const MenuCard = () => {
   };
 
   return (
-    <div className="relative backdrop-blur-sm backdrop-invert mt-4 px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md">
-      <div className="text-primary text-center font-bold">Select a mode</div>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="relative backdrop-blur-sm backdrop-invert mt-4 px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md"
+    >
+      <motion.div
+        variants={item}
+        className="text-primary text-center font-bold"
+      >
+        Select a mode
+      </motion.div>
 
       <ul className="flex gap-2 mt-4">
         {menuOptions.map((option) => {
           return (
-            <li key={option.label}>
+            <motion.li key={option.label} variants={item}>
               <input
                 type="radio"
                 id={option.label}
@@ -51,13 +75,15 @@ export const MenuCard = () => {
                 <div className="text-2xl">{option.value}</div>
                 <div className="text-xs">song{option.value > 1 ? "s" : ""}</div>
               </label>
-            </li>
+            </motion.li>
           );
         })}
       </ul>
 
       <div className="flex justify-center items-center mt-4">
         <motion.button
+          variants={item}
+          layout
           whileHover={{ scale: isSongPrefetched ? 1.05 : 1 }}
           whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
           type="button"
@@ -71,6 +97,6 @@ export const MenuCard = () => {
           </motion.span>
         </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 };
