@@ -16,11 +16,6 @@ export const startPlayingAtom = atom(null, (_get, set) => {
 
 export const selectedOptionAtom = atom<MenuOption | undefined>(menuOptions[0]);
 
-export const totalSongsToPlayAtom = atom((get) => {
-  const selectedOption = get(selectedOptionAtom);
-  return selectedOption?.value || 0;
-});
-
 export const playingTimeAtom = atom((get) => {
   const selectedOption = get(selectedOptionAtom);
 
