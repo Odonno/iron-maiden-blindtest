@@ -5,7 +5,6 @@ import { map, startWith } from "rxjs/operators";
 import { isServerSide } from "../functions";
 import type { Song } from "../types/songs";
 import * as MenuAtoms from "../features/menu/state";
-import * as ResultAtoms from "../features/result/state";
 
 type GameStep =
   | "menu"
@@ -43,38 +42,40 @@ export const deckAtom = atomWithObservable((get) => {
   );
 });
 
-export const currentSongIndexAtom = atom(0);
-
 export const totalGoodAnsweredSongsAtom = atom(0);
+
+export const currentSongIndexAtom = atom<number | undefined>(undefined);
 
 export const currentSongAtom = atom((get) => {
   const currentSongIndex = get(currentSongIndexAtom);
+
+  if (currentSongIndex === undefined) {
+    return undefined;
+  }
+
   const deck = get(deckAtom);
 
-  return deck[currentSongIndex % deck.length];
+  const index = currentSongIndex;
+  return deck[index % deck.length];
 });
 
 export const nextSongAtom = atom((get) => {
   const currentSongIndex = get(currentSongIndexAtom);
   const deck = get(deckAtom);
 
-  return deck[currentSongIndex % deck.length];
-});
-
-const songPrefetchedAtom = atom((get) => {
-  const isGameFinished = get(ResultAtoms.isGameFinishedAtom);
-  return isGameFinished ? get(nextSongAtom) : get(currentSongAtom);
+  const index = currentSongIndex === undefined ? 0 : currentSongIndex + 1;
+  return deck[index % deck.length];
 });
 
 export const isSongPrefetchedAtom = atomWithObservable<boolean>(
   (get) => {
-    const songPrefetched = get(songPrefetchedAtom);
+    const nextSong = get(nextSongAtom);
 
-    if (!songPrefetched) {
-      return of(false);
+    if (!nextSong) {
+      return of(true);
     }
 
-    const soundFileUrl = `https://saironmaidenblindtest.blob.core.windows.net${songPrefetched.soundFile}`;
+    const soundFileUrl = `https://saironmaidenblindtest.blob.core.windows.net${nextSong.soundFile}`;
 
     return from(fetch(soundFileUrl)).pipe(
       map((response) => response.ok),
@@ -87,6 +88,10 @@ export const isSongPrefetchedAtom = atomWithObservable<boolean>(
 export const numberOfRemainingSongsAtom = atom((get) => {
   const currentSongIndex = get(currentSongIndexAtom);
   const deck = get(deckAtom);
+
+  if (currentSongIndex === undefined) {
+    return deck.length;
+  }
 
   return deck.length - currentSongIndex - 1;
 });

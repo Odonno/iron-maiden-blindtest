@@ -11,7 +11,7 @@ export const resetAtom = atom(null, (_get, set) => {
 });
 
 export const playNextSongAtom = atom(null, (_get, set) => {
-  set(GameAtoms.currentSongIndexAtom, (prev) => prev + 1);
+  set(GameAtoms.currentSongIndexAtom, (prev) => (prev || 0) + 1);
   set(GameAtoms.currentStepAtom, "playing_song");
 });
 
@@ -63,20 +63,17 @@ export const isReadyAtom = atom((get) => {
 
 export const resultAtom = atom<boolean | undefined>(undefined);
 
-export const isGameFinishedAtom = atom((get) => {
-  const result = get(resultAtom);
-  return result !== undefined;
-});
-
 export const totalAnsweredSongsAtom = atom((get) => {
   const currentSongIndex = get(GameAtoms.currentSongIndexAtom);
   const currentStep = get(GameAtoms.currentStepAtom);
 
+  const songIndex = currentSongIndex || 0;
+
   if (currentStep === "song_result" || currentStep === "end_result") {
-    return currentSongIndex + 1;
+    return songIndex + 1;
   }
 
-  return currentSongIndex;
+  return songIndex;
 });
 
 export const percentOfGoodAnsweredSongsAtom = atom((get) => {

@@ -10,7 +10,6 @@ import { PreparingNextSong } from "../features/preparing/PreparingNextSong";
 import { EndResultCard } from "../features/result/EndResultCard";
 
 // TODO : fix sync between audio file and audio player
-// TODO : prefecthing next song
 // TODO : different solo modes: blindtest of the day
 // TODO : different solo modes: 1 album
 // TODO : tab on suggestions with "filter": by song (current) vs. by album

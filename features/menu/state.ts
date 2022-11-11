@@ -4,6 +4,7 @@ import type { MenuOption } from "../../types/menu";
 import * as GameAtoms from "../../state/game";
 
 export const resetAtom = atom(null, (_get, set) => {
+  set(GameAtoms.currentSongIndexAtom, undefined);
   set(selectedOptionAtom, undefined);
   set(selectedOptionAtom, menuOptions[0]);
   set(GameAtoms.totalGoodAnsweredSongsAtom, 0);
