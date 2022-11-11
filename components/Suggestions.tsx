@@ -30,7 +30,7 @@ export const Suggestions = () => {
                 whileTap={{ scale: 0.95 }}
                 type="button"
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="w-full bg-primary/95 px-4 py-3 flex rounded-md focus:outline-3 focus:outline-green-400"
+                className="w-full bg-primary/95 px-4 py-3 flex justify-center items-center rounded-md focus:outline-3 focus:outline-green-400"
               >
                 <div className="relative overflow-hidden z-10">
                   <BlurhashCanvas
@@ -48,11 +48,13 @@ export const Suggestions = () => {
                   />
                 </div>
 
-                <div className="ml-3 flex flex-col justify-start items-start">
+                <div className="ml-3 flex-1 flex flex-col justify-start items-start">
                   <div className="text-xxs sm:text-xs text-gray-300">
                     {suggestion.album.title}
                   </div>
-                  <div className="text-sm sm:text-base">{suggestion.title}</div>
+                  <div className="text-sm sm:text-base text-left">
+                    {suggestion.title}
+                  </div>
                 </div>
               </motion.button>
             </li>
