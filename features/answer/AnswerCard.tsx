@@ -30,7 +30,7 @@ export const AnswerCard = () => {
     <>
       <SoundControls />
 
-      <div className="w-80 sm:w-96 relative backdrop-blur-sm backdrop-invert mt-4 px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md">
+      <div className="w-80 sm:w-96 relative backdrop-blur-sm backdrop-invert px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md">
         <ProgressBar />
 
         <input

@@ -167,7 +167,7 @@ export const EndResultCard = () => {
         whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
         type="button"
         disabled={!isSongPrefetched}
-        className="mt-10 rounded-md flex justify-center items-center bg-white text-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-gray-400"
+        className="mt-6 sm:mt-10 rounded-md flex justify-center items-center bg-white text-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-gray-400"
         onClick={handleGoBackToMenuButtonClick}
       >
         <span className="ml-2">

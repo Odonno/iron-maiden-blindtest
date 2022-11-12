@@ -47,7 +47,7 @@ export const MenuCard = () => {
       variants={container}
       initial="hidden"
       animate="show"
-      className="relative backdrop-blur-sm backdrop-invert mt-4 px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md"
+      className="relative backdrop-blur-sm backdrop-invert px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md"
     >
       <motion.div
         variants={item}
@@ -79,7 +79,7 @@ export const MenuCard = () => {
         </label>
       </motion.div>
 
-      <ul className="flex gap-2 mt-4">
+      <ul className="w-fit mx-auto justify-center items-center grid grid-cols-2 sm:grid-cols-4 gap-2 mt-4">
         {songMenuOptions.map((option) => {
           return (
             <motion.li key={option.label} variants={item}>
