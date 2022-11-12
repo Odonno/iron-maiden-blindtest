@@ -29,7 +29,11 @@ export const deckAtom = atomWithObservable((get) => {
   }
 
   const baseUrl = document.URL;
-  const apiUrl = new URL(`/api/deck?count=${count}`, baseUrl);
+  const path =
+    selectedOption.label === "Blindtest of the day"
+      ? "/api/deck/today"
+      : `/api/deck?count=${count}`;
+  const apiUrl = new URL(path, baseUrl);
 
   return from(fetch(apiUrl)).pipe(
     switchMap((response) => {

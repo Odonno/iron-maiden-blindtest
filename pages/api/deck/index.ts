@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { songs } from "../../data/songs";
+import { songs } from "../../../data/songs";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { count: countParam } = req.query as { count: string | undefined };

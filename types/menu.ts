@@ -1,5 +1,5 @@
 export type MenuOption = {
   label: string;
-  type: "song" | "album";
+  type: "song" | "album" | "custom";
   value: number;
 };

@@ -1,12 +1,12 @@
 import { atom } from "jotai";
-import { menuOptions } from "../../data/menu";
+import { songMenuOptions } from "../../data/menu";
 import type { MenuOption } from "../../types/menu";
 import * as GameAtoms from "../../state/game";
 
 export const resetAtom = atom(null, (_get, set) => {
   set(GameAtoms.currentSongIndexAtom, undefined);
   set(selectedOptionAtom, undefined);
-  set(selectedOptionAtom, menuOptions[0]);
+  set(selectedOptionAtom, songMenuOptions[0]);
   set(GameAtoms.totalGoodAnsweredSongsAtom, 0);
 });
 
@@ -15,11 +15,16 @@ export const startPlayingAtom = atom(null, (_get, set) => {
   set(GameAtoms.currentStepAtom, "preparing_next_song");
 });
 
-export const selectedOptionAtom = atom<MenuOption | undefined>(menuOptions[0]);
+export const selectedOptionAtom = atom<MenuOption | undefined>(
+  songMenuOptions[0]
+);
 
 export const playingTimeAtom = atom((get) => {
   const selectedOption = get(selectedOptionAtom);
 
+  if (selectedOption?.label === "Blindtest of the day") {
+    return "~3 min";
+  }
   if (selectedOption?.label === "10 songs") {
     return "~5 min";
   }

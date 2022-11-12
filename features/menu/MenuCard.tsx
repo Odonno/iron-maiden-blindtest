@@ -2,9 +2,9 @@ import * as MenuAtoms from "./state";
 import * as GameAtoms from "../../state/game";
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
-import { PlayIcon } from "../../components/Icons";
+import { MusicNoteIcon, PlayIcon } from "../../components/Icons";
 import type { MenuOption } from "../../types/menu";
-import { menuOptions } from "../../data/menu";
+import { blindtestOfTheDayOption, songMenuOptions } from "../../data/menu";
 import { useEffectOnce } from "usehooks-ts";
 
 const container = {
@@ -56,8 +56,28 @@ export const MenuCard = () => {
         Select a mode
       </motion.div>
 
+      <div className="mt-4 flex flex-col justify-between items-center">
+        <input
+          type="radio"
+          id={blindtestOfTheDayOption.label}
+          name="option"
+          checked={selectedOption === blindtestOfTheDayOption}
+          className="hidden peer"
+          onChange={() =>
+            handleSelectOptionButtonClick(blindtestOfTheDayOption)
+          }
+        />
+        <label
+          htmlFor={blindtestOfTheDayOption.label}
+          className="flex justify-center items-center px-6 py-4 w-60 bg-primary rounded-md border border-gray-200 cursor-pointer peer-checked:text-red-600 peer-checked:neon-red hover:bg-primary/80"
+        >
+          <MusicNoteIcon />
+          <div className="ml-3">Blindtest of the day</div>
+        </label>
+      </div>
+
       <ul className="flex gap-2 mt-4">
-        {menuOptions.map((option) => {
+        {songMenuOptions.map((option) => {
           return (
             <motion.li key={option.label} variants={item}>
               <input
