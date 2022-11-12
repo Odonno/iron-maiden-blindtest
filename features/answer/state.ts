@@ -18,13 +18,20 @@ export const chooseAnswerAtom = atom(
   null,
   (get, set, song: Song | undefined) => {
     const currentSong = get(GameAtoms.currentSongAtom);
+
+    if (!currentSong) {
+      return;
+    }
+
     const hasRemainingSongs = get(GameAtoms.hasRemainingSongsAtom);
 
     const result = song?.title === currentSong?.title;
     set(ResultAtoms.resultAtom, result);
 
     if (result) {
-      set(GameAtoms.totalGoodAnsweredSongsAtom, (total) => total + 1);
+      set(GameAtoms.goodAnsweredSongsAtoms, (songs) =>
+        songs.concat(currentSong)
+      );
     }
 
     if (hasRemainingSongs) {

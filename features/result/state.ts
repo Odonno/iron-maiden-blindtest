@@ -18,7 +18,7 @@ export const playNextSongAtom = atom(null, (_get, set) => {
 export const playAgainAtom = atom(null, (_get, set) => {
   set(MenuAtoms.selectedOptionAtom, undefined);
   set(MenuAtoms.selectedOptionAtom, songMenuOptions[0]);
-  set(GameAtoms.totalGoodAnsweredSongsAtom, 0);
+  set(GameAtoms.goodAnsweredSongsAtoms, []);
   set(GameAtoms.currentStepAtom, "preparing_next_song");
 });
 
@@ -100,6 +100,24 @@ export const canPlayAgainAtom = atom((get) => {
   return isOneSongOptionSelected;
 });
 
+export const colorSongResultAtom = atom((get) => {
+  const greenDot = "🟩";
+  const redDot = "🟥";
+
+  const deck = get(GameAtoms.deckAtom);
+  const goodAnsweredSongs = get(GameAtoms.goodAnsweredSongsAtoms);
+
+  const dots = deck.map((song) => {
+    if (goodAnsweredSongs.includes(song)) {
+      return greenDot;
+    }
+
+    return redDot;
+  });
+
+  return dots.join("");
+});
+
 export const textToShareAtom = atom((get) => {
   const selectedOption = get(MenuAtoms.selectedOptionAtom);
 
@@ -122,10 +140,10 @@ https://iron-maiden-blindtest.vercel.app/`;
   if (selectedOption.label === "Blindtest of the day") {
     const totalGoodAnsweredSongs = get(GameAtoms.totalGoodAnsweredSongsAtom);
     const totalAnsweredSongs = get(totalAnsweredSongsAtom);
-
-    // TODO : display color (green/red) based on each song result
+    const colorSongResult = get(colorSongResultAtom);
 
     return `I found ${totalGoodAnsweredSongs} of ${totalAnsweredSongs} songs on the blindtest of the day!
+${colorSongResult}
 https://iron-maiden-blindtest.vercel.app/`;
   }
 
@@ -133,14 +151,14 @@ https://iron-maiden-blindtest.vercel.app/`;
     const totalGoodAnsweredSongs = get(GameAtoms.totalGoodAnsweredSongsAtom);
     const totalAnsweredSongs = get(totalAnsweredSongsAtom);
     const percentOfGoodAnsweredSongs = get(percentOfGoodAnsweredSongsAtom);
-
-    // TODO : display color (green/red) based on each song result
+    const colorSongResult = get(colorSongResultAtom);
 
     return `I correctly guessed ${totalGoodAnsweredSongs} out of ${totalAnsweredSongs} song${
       totalAnsweredSongs > 1 ? "s" : ""
     } ${
       percentOfGoodAnsweredSongs > 0 ? `(${percentOfGoodAnsweredSongs} %)` : ""
     }.
+${colorSongResult}
 https://iron-maiden-blindtest.vercel.app/`;
   }
 });

@@ -7,7 +7,7 @@ export const resetAtom = atom(null, (_get, set) => {
   set(GameAtoms.currentSongIndexAtom, undefined);
   set(selectedOptionAtom, undefined);
   set(selectedOptionAtom, songMenuOptions[0]);
-  set(GameAtoms.totalGoodAnsweredSongsAtom, 0);
+  set(GameAtoms.goodAnsweredSongsAtoms, []);
 });
 
 export const startPlayingAtom = atom(null, (_get, set) => {
