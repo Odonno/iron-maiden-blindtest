@@ -56,7 +56,10 @@ export const MenuCard = () => {
         Select a mode
       </motion.div>
 
-      <div className="mt-4 flex flex-col justify-between items-center">
+      <motion.div
+        variants={item}
+        className="mt-4 flex flex-col justify-between items-center"
+      >
         <input
           type="radio"
           id={blindtestOfTheDayOption.label}
@@ -74,7 +77,7 @@ export const MenuCard = () => {
           <MusicNoteIcon />
           <div className="ml-3">Blindtest of the day</div>
         </label>
-      </div>
+      </motion.div>
 
       <ul className="flex gap-2 mt-4">
         {songMenuOptions.map((option) => {

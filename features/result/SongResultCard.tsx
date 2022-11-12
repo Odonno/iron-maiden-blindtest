@@ -83,26 +83,35 @@ export const SongResultCard = () => {
           </div>
         </motion.div>
 
-        <motion.div variants={item} className="relative overflow-hidden">
-          <BlurhashCanvas
-            hash={currentSong.album.blurHash}
-            width={200}
-            height={200}
-            punch={1}
-            className="absolute inset-0 w-full h-full z-[-1]"
-          />
-          <Image
-            src={currentSong.album.image}
-            alt="Album cover of the song"
-            width={200}
-            height={200}
-          />
-        </motion.div>
+        {currentSong && (
+          <>
+            <motion.div variants={item} className="relative overflow-hidden">
+              <BlurhashCanvas
+                hash={currentSong.album.blurHash}
+                width={200}
+                height={200}
+                punch={1}
+                className="absolute inset-0 w-full h-full z-[-1]"
+              />
+              <Image
+                src={currentSong.album.image}
+                alt="Album cover of the song"
+                width={200}
+                height={200}
+              />
+            </motion.div>
 
-        <motion.div variants={item} className="mt-4 flex flex-col items-center">
-          <div className="text-xs text-gray-700">{currentSong.album.title}</div>
-          <div className="text-primary">{currentSong.title}</div>
-        </motion.div>
+            <motion.div
+              variants={item}
+              className="mt-4 flex flex-col items-center"
+            >
+              <div className="text-xs text-gray-700">
+                {currentSong.album.title}
+              </div>
+              <div className="text-primary">{currentSong.title}</div>
+            </motion.div>
+          </>
+        )}
 
         {displaySummaryResult && (
           <motion.div variants={item}>

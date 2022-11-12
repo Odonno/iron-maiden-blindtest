@@ -9,6 +9,7 @@ import { MenuCard } from "../features/menu/MenuCard";
 import { PreparingNextSong } from "../features/preparing/PreparingNextSong";
 import { EndResultCard } from "../features/result/EndResultCard";
 
+// TODO : pre-commit hook (linter, prettier)
 // TODO : fix sync between audio file and audio player
 // TODO : different solo modes: 1 album
 // TODO : tab on suggestions with "filter": by song (current) vs. by album

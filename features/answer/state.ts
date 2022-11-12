@@ -20,7 +20,7 @@ export const chooseAnswerAtom = atom(
     const currentSong = get(GameAtoms.currentSongAtom);
     const hasRemainingSongs = get(GameAtoms.hasRemainingSongsAtom);
 
-    const result = song?.title === currentSong.title;
+    const result = song?.title === currentSong?.title;
     set(ResultAtoms.resultAtom, result);
 
     if (result) {
