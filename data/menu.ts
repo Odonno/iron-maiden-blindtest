@@ -6,7 +6,7 @@ export const blindtestOfTheDayOption: MenuOption = {
   value: 6,
 };
 
-export const menuOptions: MenuOption[] = [
+const menuOptions: MenuOption[] = [
   blindtestOfTheDayOption,
   { label: "1 song", type: "song", value: 1 },
   { label: "10 songs", type: "song", value: 10 },

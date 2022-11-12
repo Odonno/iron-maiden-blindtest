@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import * as MenuAtoms from "../menu/state";
 import * as GameAtoms from "../../state/game";
-import { menuOptions } from "../../data/menu";
+import { songMenuOptions } from "../../data/menu";
 import { atomWithObservable } from "jotai/utils";
 import { animationFrames, of } from "rxjs";
 import { endWith, map, takeWhile } from "rxjs/operators";
@@ -17,7 +17,7 @@ export const playNextSongAtom = atom(null, (_get, set) => {
 
 export const playAgainAtom = atom(null, (_get, set) => {
   set(MenuAtoms.selectedOptionAtom, undefined);
-  set(MenuAtoms.selectedOptionAtom, menuOptions[0]);
+  set(MenuAtoms.selectedOptionAtom, songMenuOptions[0]);
   set(GameAtoms.totalGoodAnsweredSongsAtom, 0);
   set(GameAtoms.currentStepAtom, "preparing_next_song");
 });
@@ -98,4 +98,54 @@ export const canPlayAgainAtom = atom((get) => {
   const isOneSongOptionSelected = get(isOneSongOptionSelectedAtom);
 
   return isOneSongOptionSelected;
+});
+
+export const textToShareAtom = atom((get) => {
+  const selectedOption = get(MenuAtoms.selectedOptionAtom);
+
+  if (!selectedOption) {
+    return undefined;
+  }
+
+  if (selectedOption.value === 1) {
+    const result = get(resultAtom);
+    const currentSong = get(GameAtoms.currentSongAtom);
+
+    if (!result || !currentSong) {
+      return undefined;
+    }
+
+    return `I found the song ${currentSong.title} of the album ${currentSong.album.title}, by Iron Maiden!
+https://iron-maiden-blindtest.vercel.app/`;
+  }
+
+  if (selectedOption.label === "Blindtest of the day") {
+    const totalGoodAnsweredSongs = get(GameAtoms.totalGoodAnsweredSongsAtom);
+    const totalAnsweredSongs = get(totalAnsweredSongsAtom);
+
+    // TODO : display color (green/red) based on each song result
+
+    return `I found ${totalGoodAnsweredSongs} of ${totalAnsweredSongs} songs on the blindtest of the day!
+https://iron-maiden-blindtest.vercel.app/`;
+  }
+
+  if (selectedOption.value > 1) {
+    const totalGoodAnsweredSongs = get(GameAtoms.totalGoodAnsweredSongsAtom);
+    const totalAnsweredSongs = get(totalAnsweredSongsAtom);
+    const percentOfGoodAnsweredSongs = get(percentOfGoodAnsweredSongsAtom);
+
+    // TODO : display color (green/red) based on each song result
+
+    return `I correctly guessed ${totalGoodAnsweredSongs} out of ${totalAnsweredSongs} song${
+      totalAnsweredSongs > 1 ? "s" : ""
+    } ${
+      percentOfGoodAnsweredSongs > 0 ? `(${percentOfGoodAnsweredSongs} %)` : ""
+    }.
+https://iron-maiden-blindtest.vercel.app/`;
+  }
+});
+
+export const canShareResultsAtom = atom((get) => {
+  const textToShare = get(textToShareAtom);
+  return !!textToShare;
 });

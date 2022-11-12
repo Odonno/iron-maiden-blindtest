@@ -1,14 +1,15 @@
-import { CheckCircleIcon, PlayIcon } from "../../components/Icons";
+import { CheckCircleIcon, PlayIcon, ShareIcon } from "../../components/Icons";
 import Image from "next/image";
 import * as GameAtoms from "../../state/game";
+import * as ResultAtoms from "./state";
 import { useAtom } from "jotai";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
 import { useElementSize, useTimeout } from "usehooks-ts";
 import { useState } from "react";
 import { BlurhashCanvas } from "react-blurhash";
-import * as ResultAtoms from "./state";
 import { SummaryResult } from "./SummaryResult";
+import { copyTextToClipboard } from "../../functions/clipboard";
 
 const container = {
   hidden: {},
@@ -31,17 +32,28 @@ export const EndResultCard = () => {
   const [result] = useAtom(ResultAtoms.resultAtom);
   const [isSongPrefetched] = useAtom(GameAtoms.isSongPrefetchedAtom);
   const [displaySummaryResult] = useAtom(ResultAtoms.displaySummaryResultAtom);
+  const [canShareResults] = useAtom(ResultAtoms.canShareResultsAtom);
+  const [textToShare] = useAtom(ResultAtoms.textToShareAtom);
   const [canPlayAgain] = useAtom(ResultAtoms.canPlayAgainAtom);
   const [, playAgain] = useAtom(ResultAtoms.playAgainAtom);
   const [, goBackToMenu] = useAtom(ResultAtoms.goBackToMenuAtom);
 
   const [canDisplayConfetti, setCanDisplayConfetti] = useState(false);
+  const [isTextCopied, setIsTextCopied] = useState(false);
 
   const [containerRef, { width, height }] = useElementSize();
 
   useTimeout(() => {
     setCanDisplayConfetti(result === true && width > 0 && height > 0);
   }, 300);
+
+  const handleShareButtonClick = async () => {
+    if (textToShare) {
+      await copyTextToClipboard(textToShare);
+
+      setIsTextCopied(true);
+    }
+  };
 
   const handleReplayButtonClick = () => {
     playAgain();
@@ -115,20 +127,38 @@ export const EndResultCard = () => {
           </motion.div>
         )}
 
-        {canPlayAgain && (
-          <motion.button
-            variants={item}
-            whileHover={{ scale: isSongPrefetched ? 1.05 : 1 }}
-            whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
-            type="button"
-            disabled={!isSongPrefetched}
-            className="mt-6 rounded-md flex justify-center items-center bg-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-primary/20"
-            onClick={handleReplayButtonClick}
-          >
-            <PlayIcon />
-            <span className="ml-2">Play again?</span>
-          </motion.button>
-        )}
+        <div className="mt-6">
+          {canShareResults && (
+            <motion.button
+              variants={item}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="button"
+              className="mb-2 w-40 rounded-md flex justify-center items-center bg-sky-600 text-white px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-primary/20"
+              onClick={handleShareButtonClick}
+            >
+              <ShareIcon className="w-5 h-5" />
+              <span className="ml-2">
+                {isTextCopied ? "Text copied!" : "Share results"}
+              </span>
+            </motion.button>
+          )}
+
+          {canPlayAgain && (
+            <motion.button
+              variants={item}
+              whileHover={{ scale: isSongPrefetched ? 1.05 : 1 }}
+              whileTap={{ scale: isSongPrefetched ? 0.95 : 1 }}
+              type="button"
+              disabled={!isSongPrefetched}
+              className="mt-2 w-40 rounded-md flex justify-center items-center bg-primary px-6 py-2 text-xs focus:outline-3 focus:outline-green-400 disabled:bg-primary/20"
+              onClick={handleReplayButtonClick}
+            >
+              <PlayIcon className="w-5 h-5" />
+              <span className="ml-2">Play again?</span>
+            </motion.button>
+          )}
+        </div>
       </motion.div>
 
       <motion.button
