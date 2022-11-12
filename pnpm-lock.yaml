@@ -12,7 +12,7 @@ specifiers:
   eslint-config-next: 13.0.0
   flexsearch: ^0.7.21
   framer-motion: ^7.3.6
-  jotai: ^1.9.1
+  jotai: ^1.9.2
   next: 13.0.0
   postcss: ^8.4.16
   react: 18.2.0
@@ -31,7 +31,7 @@ dependencies:
   classnames: 2.3.2
   flexsearch: 0.7.21
   framer-motion: 7.3.6_biqbaboplfbrettd7655fr4n2y
-  jotai: 1.9.1_react@18.2.0
+  jotai: 1.9.2_react@18.2.0
   next: 13.0.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-blurhash: 0.2.0_lesa7g4ho236zevs7zsdlyrpd4
@@ -1526,8 +1526,8 @@ packages:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
 
-  /jotai/1.9.1_react@18.2.0:
-    resolution: {integrity: sha512-rDmmDL6owX4Kg5fAV0arjGVJmT1VYnkROwAx/PgpMkYCzvHEtABm8qnq/Ki5o5/GFGbvdfE11VNP1brDWP7+9w==}
+  /jotai/1.9.2_react@18.2.0:
+    resolution: {integrity: sha512-/893WrniZwoVc0+3JR056r0FTC/tGbgyHco9dfgde6K8TU6XNxrOSw4jCRdDicncw67A37v2GNGzXSpHKbHPmw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       '@babel/core': '*'
