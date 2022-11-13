@@ -118,6 +118,8 @@ export const colorSongResultAtom = atom((get) => {
   return dots.join("");
 });
 
+const appUrl = "https://iron-maiden-blindtest.app/";
+
 export const textToShareAtom = atom((get) => {
   const selectedOption = get(MenuAtoms.selectedOptionAtom);
 
@@ -134,7 +136,7 @@ export const textToShareAtom = atom((get) => {
     }
 
     return `I found the song ${currentSong.title} of the album ${currentSong.album.title}, by Iron Maiden!
-https://iron-maiden-blindtest.vercel.app/`;
+${appUrl}`;
   }
 
   if (selectedOption.label === "Blindtest of the day") {
@@ -144,7 +146,7 @@ https://iron-maiden-blindtest.vercel.app/`;
 
     return `I found ${totalGoodAnsweredSongs} of ${totalAnsweredSongs} songs on the blindtest of the day!
 ${colorSongResult}
-https://iron-maiden-blindtest.vercel.app/`;
+${appUrl}`;
   }
 
   if (selectedOption.value > 1) {
@@ -159,7 +161,7 @@ https://iron-maiden-blindtest.vercel.app/`;
       percentOfGoodAnsweredSongs > 0 ? `(${percentOfGoodAnsweredSongs} %)` : ""
     }.
 ${colorSongResult}
-https://iron-maiden-blindtest.vercel.app/`;
+${appUrl}`;
   }
 });
 
