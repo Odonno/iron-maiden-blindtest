@@ -18,6 +18,7 @@ specifiers:
   react: 18.2.0
   react-blurhash: ^0.2.0
   react-confetti: ^6.1.0
+  react-div-100vh: ^0.7.0
   react-dom: 18.2.0
   rxjs: ^7.5.6
   seeded-rand: ^2.0.1
@@ -36,6 +37,7 @@ dependencies:
   react: 18.2.0
   react-blurhash: 0.2.0_lesa7g4ho236zevs7zsdlyrpd4
   react-confetti: 6.1.0_react@18.2.0
+  react-div-100vh: 0.7.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   rxjs: 7.5.6
   seeded-rand: 2.0.1
@@ -2023,6 +2025,14 @@ packages:
     dependencies:
       react: 18.2.0
       tween-functions: 1.2.0
+    dev: false
+
+  /react-div-100vh/0.7.0_react@18.2.0:
+    resolution: {integrity: sha512-I3d77tQyaSlOx/6vurDDLk7upb5GA2ldEtVXkk7Kn5cy+tLlS0KlqDK14xUxlxh7jz4StjgKcwFyrpymsPpomA==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-dom/18.2.0_react@18.2.0:

@@ -8,6 +8,7 @@ import { AnswerCard } from "../features/answer/AnswerCard";
 import { MenuCard } from "../features/menu/MenuCard";
 import { PreparingNextSong } from "../features/preparing/PreparingNextSong";
 import { EndResultCard } from "../features/result/EndResultCard";
+import Div100vh from "react-div-100vh";
 
 // TODO : pre-commit hook (linter, prettier)
 // TODO : fix sync between audio file and audio player
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="text-white">
-      <main className="flex flex-col items-center min-h-screen max-h-screen overflow-hidden">
+      <Div100vh className="flex flex-col items-center overflow-hidden">
         <h1 className="flex flex-col text-center font-iron-maiden my-6">
           <span className="neon-red text-4xl text-red-600">Iron Maiden</span>
           <span className="neon-blue mt-3 text-3xl text-white">Blind test</span>
@@ -33,7 +34,7 @@ const Home: NextPage = () => {
           {currentStepAtom === "song_result" && <SongResultCard />}
           {currentStepAtom === "end_result" && <EndResultCard />}
         </div>
-      </main>
+      </Div100vh>
     </div>
   );
 };
