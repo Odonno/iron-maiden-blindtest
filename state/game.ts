@@ -46,10 +46,10 @@ export const deckAtom = atomWithObservable((get) => {
   );
 });
 
-export const goodAnsweredSongsAtoms = atom<Song[]>([]);
+export const goodAnsweredSongsAtom = atom<Song[]>([]);
 
 export const totalGoodAnsweredSongsAtom = atom((get) => {
-  const goodAnsweredSongs = get(goodAnsweredSongsAtoms);
+  const goodAnsweredSongs = get(goodAnsweredSongsAtom);
   return goodAnsweredSongs.length;
 });
 

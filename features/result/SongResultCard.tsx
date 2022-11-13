@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { BlurhashCanvas } from "react-blurhash";
 import * as ResultAtoms from "./state";
 import { SummaryResult } from "./SummaryResult";
+import { NextSongCounter } from "../../components/NextSongCounter";
 
 const container = {
   hidden: {},
@@ -120,16 +121,7 @@ export const SongResultCard = () => {
         )}
       </motion.div>
 
-      <div className="mt-6 flex flex-col justify-center items-center">
-        <div className="font-bold text-xs">Next song in..</div>
-
-        <div className="mt-6 relative w-20 h-20 bg-primary/80 rounded-full">
-          <div className="circle absolute rounded-full w-full h-full"></div>
-          <div className="absolute flex justify-center items-center font-bold w-full h-full text-5xl">
-            {remainingTime}
-          </div>
-        </div>
-      </div>
+      <NextSongCounter remainingTime={remainingTime} />
     </>
   );
 };

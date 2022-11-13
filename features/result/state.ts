@@ -18,7 +18,7 @@ export const playNextSongAtom = atom(null, (_get, set) => {
 export const playAgainAtom = atom(null, (_get, set) => {
   set(MenuAtoms.selectedOptionAtom, undefined);
   set(MenuAtoms.selectedOptionAtom, songMenuOptions[0]);
-  set(GameAtoms.goodAnsweredSongsAtoms, []);
+  set(GameAtoms.goodAnsweredSongsAtom, []);
   set(GameAtoms.currentStepAtom, "preparing_next_song");
 });
 
@@ -105,7 +105,7 @@ export const colorSongResultAtom = atom((get) => {
   const redDot = "🟥";
 
   const deck = get(GameAtoms.deckAtom);
-  const goodAnsweredSongs = get(GameAtoms.goodAnsweredSongsAtoms);
+  const goodAnsweredSongs = get(GameAtoms.goodAnsweredSongsAtom);
 
   const dots = deck.map((song) => {
     if (goodAnsweredSongs.includes(song)) {

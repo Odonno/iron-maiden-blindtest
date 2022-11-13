@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as PreparingAtoms from "./state";
 import * as GameAtoms from "../../state/game";
 import { useEffectOnce } from "usehooks-ts";
+import { NextSongCounter } from "../../components/NextSongCounter";
 
 export const PreparingNextSong = () => {
   const [, reset] = useAtom(PreparingAtoms.resetAtom);
@@ -24,16 +25,5 @@ export const PreparingNextSong = () => {
     }
   }, [isReset, isReady, setCurrentStep, setStartedAt]);
 
-  return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="font-bold text-xs">Next song in..</div>
-
-      <div className="mt-6 relative w-20 h-20 bg-primary/80 rounded-full">
-        <div className="circle absolute rounded-full w-full h-full"></div>
-        <div className="absolute flex justify-center items-center font-bold w-full h-full text-5xl">
-          {remainingTime}
-        </div>
-      </div>
-    </div>
-  );
+  return <NextSongCounter remainingTime={remainingTime} />;
 };

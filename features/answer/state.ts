@@ -29,7 +29,7 @@ export const chooseAnswerAtom = atom(
     set(ResultAtoms.resultAtom, result);
 
     if (result) {
-      set(GameAtoms.goodAnsweredSongsAtoms, (songs) =>
+      set(GameAtoms.goodAnsweredSongsAtom, (songs) =>
         songs.concat(currentSong)
       );
     }
