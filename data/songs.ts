@@ -62,7 +62,7 @@ const theXFactor: Album = {
 
 const virtualXI: Album = {
   title: "Virtual XI",
-  image: "/albums/virtual-xi.jpg",
+  image: "/albums/virtual-XI.jpg",
   blurHash: "UED+G38v$,Bo*|q^Q.a0m*R3NEoGO@pJTdtR",
 };
 
