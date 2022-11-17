@@ -121,7 +121,9 @@ export const SongResultCard = () => {
         )}
       </motion.div>
 
-      <NextSongCounter remainingTime={remainingTime} />
+      <div className="mt-6">
+        <NextSongCounter remainingTime={remainingTime} />
+      </div>
     </>
   );
 };
