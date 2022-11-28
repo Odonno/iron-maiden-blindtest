@@ -49,16 +49,18 @@ export const MenuCard = () => {
       animate="show"
       className="relative backdrop-blur-sm backdrop-invert px-6 sm:px-12 pt-8 pb-6 sm:pb-8 rounded-md"
     >
-      <motion.div
-        variants={item}
-        className="text-primary text-center font-bold"
-      >
-        Select a mode
-      </motion.div>
+      <div className="flex justify-center -mt-8">
+        <motion.div
+          variants={item}
+          className="bg-primary text-white px-4 py-3 text-sm text-center rounded-b-md font-bold"
+        >
+          Select a mode
+        </motion.div>
+      </div>
 
       <motion.div
         variants={item}
-        className="mt-4 flex flex-col justify-between items-center"
+        className="mt-8 flex flex-col justify-between items-center"
       >
         <input
           type="radio"
