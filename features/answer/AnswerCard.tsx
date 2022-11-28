@@ -37,7 +37,7 @@ export const AnswerCard = () => {
           ref={inputRef}
           type="text"
           className="w-full bg-primary/95 p-3 sm:p-4 rounded-md"
-          placeholder="Guess the song"
+          placeholder="Search a song"
           value={answer}
           onChange={handleAnswerChange}
         />
